@@ -3,21 +3,23 @@ export const CryptoContext = createContext({});
 
 export const CryptoProvider = ({ children }) => {
   const [CryptoData, setCryptoData] = useState([]);
+  const [coinName, setCoinName] = useState("");
   const [page, setPage] = useState(1);
   const [allCoin, setAllCoin] = useState([]);
-
+  const [coinDetails, setCoinDetails] = useState({});
+  const [coinId, setCoinId] = useState("");
   const getData = async () => {
     const data = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en&precision=10`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinName.toLowerCase()}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en&precision=10`
     );
 
     const res = await data.json();
-    console.log(res);
+    // console.log(res);
     setCryptoData(res);
   };
   useEffect(() => {
     getData();
-  }, [page]);
+  }, [page, coinName]);
 
   const getAllCOins = async () => {
     const data = await fetch(`https://api.coingecko.com/api/v3/coins/list`);
@@ -27,13 +29,29 @@ export const CryptoProvider = ({ children }) => {
   useEffect(() => {
     getAllCOins();
   }, []);
-
+  const getCoinsData = async () => {
+    const data = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&market_data=true&community_data=true&sparkline=true`
+    );
+    const res = await data.json();
+    console.log(res);
+    setCoinDetails(res);
+  };
+  useEffect(() => {
+    if (coinId.trim().length > 0) getCoinsData();
+  }, [coinId]);
+  console.log(coinId);
   return (
     <CryptoContext.Provider
       value={{
         CryptoData,
         setPage,
+        setCoinName,
+        coinName,
         allCoin,
+        coinDetails,
+        setCoinId,
+        coinId,
       }}
     >
       {children}
