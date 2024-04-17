@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const CryptoTable = () => {
   const { CryptoData } = useContext(CryptoContext);
-  console.log(CryptoData);
+
   const navigate = useNavigate();
   const changeToUsd = (Value) => {
     return new Intl.NumberFormat("en-IN", {
@@ -17,19 +17,37 @@ const CryptoTable = () => {
     navigate(`/coin/${coinId}`);
   };
   return (
-    <div className="max-h-[400px]">
+    <div className="max-h-[700px]">
       <table className="min-w-full">
-        <thead className=" bg-gray-200 sticky top-0 ">
+        <thead className=" bg-gray-200 sticky top-0 z-30 ">
           <tr className="w-full mb-10">
-            <th className="py-2 ">Name</th>
-            <th className="py-2 ">Price</th>
-            <th className="py-2 ">1h%</th>
-            <th className="py-2 ">24h%</th>
-            <th className="py-2 ">7d%</th>
-            <th className="py-2 ">Market Cap</th>
-            <th className="py-2 ">Total Volume</th>
-            <th className="py-2 ">Circulating Supply</th>
-            <th className="py-2 ">Last 7 Days</th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold">
+              Name
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold ">
+              Price
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold ">
+              1h%
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold ">
+              24h%
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold md:sticky md:table-cell hidden">
+              7d%
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold md:sticky md:table-cell hidden">
+              Market Cap
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold md:sticky md:table-cell hidden">
+              Total Volume
+            </th>
+            <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold md:sticky md:table-cell hidden">
+              Circulating Supply
+            </th>
+            <th className="py-2  md:sticky md:table-cell hidden">
+              Last 7 Days
+            </th>
           </tr>
         </thead>
         <tbody className=" w-full   overflow-y-auto text-center ">
@@ -37,24 +55,26 @@ const CryptoTable = () => {
             CryptoData.map((coin) => (
               <tr
                 key={coin.id}
-                className="hover:bg-zinc-200 h-14 cursor-pointer"
+                className="hover:bg-zinc-200 md:h-14 h-8 cursor-pointer  "
                 onClick={() => handleClick(coin.id)}
               >
-                <td className="flex gap-1   items-center py-4 font-semibold  justify-center   ">
-                  <td className="w-8 h-8 rounded-full ">
+                <td className="flex gap-1 items-center py-2 md:py-4 font-normal md:font-semibold  justify-center   ">
+                  <td className="w-6 h-6 md:w-8 md:h-8 rounded-full ">
                     <img
                       className="w-full h-full rounded-full "
                       src={coin.image}
                       alt=""
                     />
                   </td>
-                  <td className="text-base w-[50%]   font-semibold">
+                  <td className="md:text-base text-xs w-[60%] md:w-[50%]   font-semibold">
                     {coin.name} {coin.symbol.toUpperCase()}
                   </td>
                 </td>
-                <td>{changeToUsd(coin.current_price)}</td>
+                <td className="md:text-base text-xs">
+                  {changeToUsd(coin.current_price)}
+                </td>
                 <td
-                  className={`${
+                  className={`md:text-base text-xs ${
                     coin.price_change_percentage_1h_in_currency > 0
                       ? "text-green-500"
                       : "text-red-500"
@@ -63,7 +83,7 @@ const CryptoTable = () => {
                   {coin.price_change_percentage_1h_in_currency.toFixed(5)}%
                 </td>
                 <td
-                  className={`${
+                  className={`md:text-base text-xs ${
                     coin.price_change_percentage_24h_in_currency > 0
                       ? "text-green-500"
                       : "text-red-500"
@@ -72,7 +92,8 @@ const CryptoTable = () => {
                   {coin.price_change_percentage_24h_in_currency.toFixed(5)}%
                 </td>
                 <td
-                  className={`${
+                  className={`md:sticky md:table-cell hidden
+                  ${
                     coin.price_change_percentage_7d_in_currency > 0
                       ? "text-green-500"
                       : "text-red-500"
@@ -80,13 +101,17 @@ const CryptoTable = () => {
                 >
                   {coin.price_change_percentage_7d_in_currency.toFixed(5)}%
                 </td>
-                <td>{changeToUsd(coin.market_cap)}</td>
-                <td>{changeToUsd(coin.total_volume)}</td>
-                <td>
+                <td className="md:sticky md:table-cell hidden">
+                  {changeToUsd(coin.market_cap)}
+                </td>
+                <td className="md:sticky md:table-cell hidden">
+                  {changeToUsd(coin.total_volume)}
+                </td>
+                <td className="md:sticky md:table-cell hidden">
                   {coin.circulating_supply}
                   <span className=""> {coin.symbol.toUpperCase()}</span>
                 </td>
-                <td>7 Days</td>
+                <td className="md:sticky md:table-cell hidden">7 Days</td>
               </tr>
             ))
           ) : (

@@ -4,7 +4,7 @@ import { Search } from "./Search";
 
 const HomePage = () => {
   return (
-    <div className="h-[1200px] w-full my-2">
+    <div className="h-full w-full my-2">
       <Search />
       <div className="overflow-y-auto">
         <CryptoTable />

@@ -5,7 +5,7 @@ export const Search = () => {
   const { setCoinName, coinName } = useContext(CryptoContext);
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [search, setSearch] = useState([]);
-  console.log(coinName);
+
   const [searchText, setSearchText] = useState("");
   const getSearch = async () => {
     const data = await fetch(
@@ -32,7 +32,7 @@ export const Search = () => {
         }}
       >
         <input
-          className="border-[2px] outline-none rounded-md px-2 w-64 py-1"
+          className="md:border-[2px] border-[1px] outline-none rounded-md px-2 md:text-base text-xs w-[70%] md:w-64 py-1"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -40,16 +40,19 @@ export const Search = () => {
           }}
           type="text"
         />
-        <button type="submit" className="bg-blue-200 px-2 py-1 rounded-lg">
+        <button
+          type="submit"
+          className="bg-blue-200 px-2 py-1 md:text-base text-xs md:px-2 md:py-1 rounded-lg"
+        >
           Search
         </button>
       </form>
       {showSuggestion && searchText.trim().length > 0 && (
-        <div className=" w-[25%]   absolute z-30 left-[3%] top-10 h-56 overflow-x-hidden backdrop-blur-md opacity-90">
+        <div className=" z-50  w-[70%] md:w-[25%]   absolute  left-[10%] md:left-[3%] top-8 md:top-10 h-56 overflow-x-hidden backdrop-blur-md opacity-90">
           {search?.coins?.map((c) => (
             <div
               key={c.id}
-              className="py-2 hover:bg-red-300 flex items-center gap-2 px-2 mb-2 "
+              className="md:py-2 py-1 hover:bg-blue-200 flex items-center gap-2 px-2 mb-1 md:mb-2 "
               onClick={() => {
                 setCoinName(c.name);
                 setSearchText(c.name);
@@ -57,8 +60,14 @@ export const Search = () => {
                 setShowSuggestion(false);
               }}
             >
-              <img className="w-6 h-6 rounded-full " src={c?.large} alt="" />
-              <p className="font-semibold">{c?.name}</p>
+              <img
+                className="w-4 h-4 md:w-6 md:h-6 rounded-full "
+                src={c?.large}
+                alt=""
+              />
+              <p className="md:font-semibold text-xs font-semibold">
+                {c?.name}
+              </p>
             </div>
           ))}
         </div>
