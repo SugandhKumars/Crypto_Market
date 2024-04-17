@@ -37,6 +37,13 @@ const CoinDetails = () => {
       maximumFractionDigits: 5,
     }).format(Value);
   };
+  const changeToInr = (Value) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "inr",
+      maximumFractionDigits: 5,
+    }).format(Value);
+  };
   return (
     <>
       {Object.keys(coinDetails).length > 0 ? (
@@ -75,8 +82,7 @@ const CoinDetails = () => {
                 <p className="font-medium text-sm text-zinc-400">(24H)</p>
               </div>
               <p className="font-medium text-sm">
-                ₹
-                {changeToUsd(
+                {changeToInr(
                   coinDetails?.market_data?.current_price?.inr.toFixed(2)
                 )}
               </p>
