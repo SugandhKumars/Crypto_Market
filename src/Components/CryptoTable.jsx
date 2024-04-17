@@ -25,7 +25,7 @@ const CryptoTable = () => {
             CryptoData.map((coin) => (
               <tr
                 key={coin.id}
-                className="hover:bg-blue-100 h-14 cursor-pointer"
+                className="hover:bg-zinc-200 h-14 cursor-pointer"
               >
                 <td className="flex gap-2   items-center py-4 font-semibold  justify-center   ">
                   <td className="w-8 h-8 rounded-full ">

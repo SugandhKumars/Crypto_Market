@@ -1,9 +1,10 @@
 import CryptoTable from "./Components/CryptoTable";
+import HomePage from "./Components/HomePage";
 
 function App() {
   return (
     <>
-      <CryptoTable />
+      <HomePage />
     </>
   );
 }
