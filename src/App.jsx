@@ -1,5 +1,11 @@
+import CryptoTable from "./Components/CryptoTable";
+
 function App() {
-  return <>Hello</>;
+  return (
+    <>
+      <CryptoTable />
+    </>
+  );
 }
 
 export default App;
