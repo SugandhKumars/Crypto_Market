@@ -1,10 +1,13 @@
-import CryptoTable from "./Components/CryptoTable";
+import CoinDetails from "./Components/CoinDetails";
 import HomePage from "./Components/HomePage";
-
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/coin/:id" element={<CoinDetails />} />
+      </Routes>
     </>
   );
 }

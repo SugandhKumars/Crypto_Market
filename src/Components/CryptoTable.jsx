@@ -1,9 +1,21 @@
 import React, { useContext } from "react";
 import { CryptoContext } from "../Context/CryptoContext";
+import { useNavigate } from "react-router-dom";
 
 const CryptoTable = () => {
   const { CryptoData } = useContext(CryptoContext);
   console.log(CryptoData);
+  const navigate = useNavigate();
+  const changeToUsd = (Value) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "usd",
+      maximumFractionDigits: 5,
+    }).format(Value);
+  };
+  const handleClick = (coinId) => {
+    navigate(`/coin/${coinId}`);
+  };
   return (
     <div className="max-h-[400px]">
       <table className="min-w-full">
@@ -26,8 +38,9 @@ const CryptoTable = () => {
               <tr
                 key={coin.id}
                 className="hover:bg-zinc-200 h-14 cursor-pointer"
+                onClick={() => handleClick(coin.id)}
               >
-                <td className="flex gap-2   items-center py-4 font-semibold  justify-center   ">
+                <td className="flex gap-1   items-center py-4 font-semibold  justify-center   ">
                   <td className="w-8 h-8 rounded-full ">
                     <img
                       className="w-full h-full rounded-full "
@@ -35,9 +48,11 @@ const CryptoTable = () => {
                       alt=""
                     />
                   </td>
-                  <td className="text-base w-24  font-semibold">{coin.name}</td>
+                  <td className="text-base w-[50%]   font-semibold">
+                    {coin.name} {coin.symbol.toUpperCase()}
+                  </td>
                 </td>
-                <td>{coin.current_price}</td>
+                <td>{changeToUsd(coin.current_price)}</td>
                 <td
                   className={`${
                     coin.price_change_percentage_1h_in_currency > 0
@@ -45,7 +60,7 @@ const CryptoTable = () => {
                       : "text-red-500"
                   }`}
                 >
-                  {coin.price_change_percentage_1h_in_currency}%
+                  {coin.price_change_percentage_1h_in_currency.toFixed(5)}%
                 </td>
                 <td
                   className={`${
@@ -54,7 +69,7 @@ const CryptoTable = () => {
                       : "text-red-500"
                   }`}
                 >
-                  {coin.price_change_percentage_24h_in_currency}%
+                  {coin.price_change_percentage_24h_in_currency.toFixed(5)}%
                 </td>
                 <td
                   className={`${
@@ -63,11 +78,14 @@ const CryptoTable = () => {
                       : "text-red-500"
                   }`}
                 >
-                  {coin.price_change_percentage_7d_in_currency}%
+                  {coin.price_change_percentage_7d_in_currency.toFixed(5)}%
                 </td>
-                <td>{coin.market_cap}</td>
-                <td>{coin.total_volume}</td>
-                <td>{coin.circulating_supply}</td>
+                <td>{changeToUsd(coin.market_cap)}</td>
+                <td>{changeToUsd(coin.total_volume)}</td>
+                <td>
+                  {coin.circulating_supply}
+                  <span className=""> {coin.symbol.toUpperCase()}</span>
+                </td>
                 <td>7 Days</td>
               </tr>
             ))
