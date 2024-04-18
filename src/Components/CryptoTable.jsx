@@ -49,9 +49,9 @@ const CryptoTable = () => {
             <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold md:sticky md:table-cell hidden">
               Circulating Supply
             </th>
-            <th className="py-2  md:sticky md:table-cell hidden">
+            {/* <th className="py-2  md:sticky md:table-cell hidden">
               Last 7 Days
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody className=" w-full   overflow-y-auto text-center ">
@@ -117,7 +117,7 @@ const CryptoTable = () => {
                   {coin.circulating_supply}
                   <span className=""> {coin.symbol.toUpperCase()}</span>
                 </td>
-                <td className="md:sticky md:table-cell hidden">7 Days</td>
+                {/* <td className="md:sticky md:table-cell hidden">7 Days</td> */}
               </tr>
             ))
           ) : (
