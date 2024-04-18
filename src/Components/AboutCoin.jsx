@@ -7,7 +7,7 @@ const AboutCoin = ({ coin }) => {
   const redirectToLink = (link) => {
     window.open(link, "blank");
   };
-  console.log(coin);
+
   return (
     <div
       className={`w-[90%] ${

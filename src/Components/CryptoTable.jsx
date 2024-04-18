@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CryptoContext } from "../Context/CryptoContext";
 import { useNavigate } from "react-router-dom";
-
+import { MetroSpinner } from "react-spinners-kit";
 const CryptoTable = () => {
   const { CryptoData, isDark } = useContext(CryptoContext);
   console.log(isDark);
@@ -86,7 +86,7 @@ const CryptoTable = () => {
                       : "text-red-500"
                   }`}
                 >
-                  {coin.price_change_percentage_1h_in_currency.toFixed(5)}%
+                  {coin.price_change_percentage_1h_in_currency?.toFixed(5)}%
                 </td>
                 <td
                   className={`md:text-base text-xs ${
@@ -122,54 +122,13 @@ const CryptoTable = () => {
             ))
           ) : (
             <>
-              <tr className="w-full h-96 justify-center items-center">
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                >
-                  Loading.. Please Wait...
+              <tr className="w-full h-[500px]">
+                <td className="text-center  " colSpan="9">
+                  <div className="flex items-center justify-center">
+                    <MetroSpinner size={40} color={"blue"} />
+                    <span className="text-xl ml-2">Please Wait...</span>
+                  </div>
                 </td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
-                <td
-                  className={`${!isDark && "bg-zinc-100"} ${
-                    isDark && "bg-black text-white"
-                  }`}
-                ></td>
               </tr>
             </>
           )}

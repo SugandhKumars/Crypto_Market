@@ -12,6 +12,7 @@ const Performance = ({ coin }) => {
       maximumFractionDigits: 5,
     }).format(Value);
   };
+
   return (
     <>
       <div
@@ -22,7 +23,7 @@ const Performance = ({ coin }) => {
         <p className="font-bold md:font-bold py-1 md:py-2 text-xl md:text-2xl">
           Performance
         </p>
-        <div className=" flex flex-col gap-4">
+        <div className=" flex flex-col gap-4 mb-6  ">
           <div className=" flex  justify-between">
             <div className="flex flex-col gap-1">
               <p className="text-zinc-400  text-sm ">Today's Low</p>
@@ -37,7 +38,7 @@ const Performance = ({ coin }) => {
               </p>
             </div>
           </div>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <div className="flex flex-col gap-1">
               <p className="text-zinc-400 text-sm">52 Week Low</p>
               <p className="text-zinc-400 font-semibold">67253.00</p>
@@ -46,7 +47,7 @@ const Performance = ({ coin }) => {
               <p className="text-zinc-400 text-sm">52 Week High</p>
               <p className="text-zinc-400 font-semibold">70000.45</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <Fundamentals coin={coin} />
       </div>

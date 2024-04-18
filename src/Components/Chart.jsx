@@ -27,7 +27,7 @@ function CustomTooltip({ payload, label, active, currency = "usd" }) {
 const Chart = ({ data, type }) => {
   return (
     <>
-      <ResponsiveContainer width={"100%"} height={400}>
+      <ResponsiveContainer width={"100%"} height={550}>
         <LineChart data={data}>
           <Line
             type="monotone"

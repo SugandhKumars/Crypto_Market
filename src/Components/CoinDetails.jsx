@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import Chart from "./Chart";
 import Performance from "./Performance";
 import { CryptoContext } from "../Context/CryptoContext";
-
+import { MetroSpinner } from "react-spinners-kit";
 const CoinDetails = () => {
   const { setCoinId, coinId, coinDetails, isDark } = useContext(CryptoContext);
   const { id } = useParams();
   const [dataType, setDataType] = useState("prices");
   const [days, setDays] = useState("7");
   const [lineCharts, setLineCharts] = useState();
+
   useEffect(() => {
     const getCharts = async (id) => {
       const data = await fetch(
@@ -96,16 +97,20 @@ const CoinDetails = () => {
                 <div className=" flex w-full  my-4 justify-between">
                   <div className="flex gap-2">
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        dataType === `prices` && `bg-black text-white`
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        dataType === `prices`
+                          ? `bg-zinc-700 text-white`
+                          : "bg-blue-200"
                       }`}
                       onClick={() => setDataType("prices")}
                     >
                       Price
                     </button>
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        dataType == "market_caps" && "bg-black text-white"
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        dataType == "market_caps"
+                          ? "bg-zinc-700 text-white"
+                          : "bg-blue-200"
                       }`}
                       onClick={() => {
                         setDataType("market_caps");
@@ -114,8 +119,10 @@ const CoinDetails = () => {
                       Market Cap
                     </button>
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        dataType == "total_volumes" && "bg-black text-white"
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        dataType == "total_volumes"
+                          ? "bg-zinc-700 text-white"
+                          : "bg-blue-200"
                       }`}
                       onClick={() => {
                         setDataType("total_volumes");
@@ -126,8 +133,8 @@ const CoinDetails = () => {
                   </div>
                   <div className="flex gap-2">
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        days == 7 && "bg-black text-white"
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        days == 7 ? "bg-zinc-700 text-white" : "bg-blue-200"
                       }`}
                       onClick={() => {
                         setDays("7");
@@ -136,8 +143,8 @@ const CoinDetails = () => {
                       7 Days
                     </button>
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        days == 14 && "bg-black text-white"
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        days == 14 ? "bg-zinc-700 text-white" : "bg-blue-200"
                       }`}
                       onClick={() => {
                         setDays("14");
@@ -146,8 +153,8 @@ const CoinDetails = () => {
                       14 Days
                     </button>
                     <button
-                      className={`bg-blue-200    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
-                        days == 30 && "bg-black text-white"
+                      className={`    text-xs md:text-base px-1 py-1  md:px-2 md:py-1 rounded-lg ${
+                        days == 30 ? "bg-zinc-700 text-white" : "bg-blue-200"
                       }`}
                       onClick={() => {
                         setDays("30");
@@ -164,9 +171,11 @@ const CoinDetails = () => {
           <Performance coin={coinDetails} />
         </div>
       ) : (
-        <p>Loading....</p>
+        <p className="w-full h-screen flex justify-center items-center">
+          <MetroSpinner size={40} color={"blue"} />
+          <span className="text-xl ml-2">Please Wait...</span>
+        </p>
       )}
-      {/* <TrndingCoins /> */}
     </>
   );
 };
