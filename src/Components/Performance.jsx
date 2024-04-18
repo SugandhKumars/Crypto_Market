@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Fundamentals from "./Fundamentals";
 import AboutCoin from "./AboutCoin";
-// import { changeToUsd } from "./utils/changeToUsd";
-// import Fundamentals from "./Fundamentals";
-// import AboutCoin from "./AboutCoin";
+import { CryptoContext } from "../Context/CryptoContext";
+
 const Performance = ({ coin }) => {
+  const { isDark } = useContext(CryptoContext);
   const changeToUsd = (Value) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
@@ -14,7 +14,11 @@ const Performance = ({ coin }) => {
   };
   return (
     <>
-      <div className="w-[90%] bg-zinc-100   p-2 px-4 rounded-lg ">
+      <div
+        className={`w-[90%] ${
+          isDark ? "bg-zinc-800 text-white " : "bg-zinc-100"
+        }   p-2 px-4 rounded-lg `}
+      >
         <p className="font-bold md:font-bold py-1 md:py-2 text-xl md:text-2xl">
           Performance
         </p>

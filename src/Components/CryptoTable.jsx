@@ -3,8 +3,8 @@ import { CryptoContext } from "../Context/CryptoContext";
 import { useNavigate } from "react-router-dom";
 
 const CryptoTable = () => {
-  const { CryptoData } = useContext(CryptoContext);
-
+  const { CryptoData, isDark } = useContext(CryptoContext);
+  console.log(isDark);
   const navigate = useNavigate();
   const changeToUsd = (Value) => {
     return new Intl.NumberFormat("en-IN", {
@@ -19,7 +19,11 @@ const CryptoTable = () => {
   return (
     <div className="max-h-[700px]">
       <table className="min-w-full">
-        <thead className=" bg-gray-200 sticky top-0 z-30 ">
+        <thead
+          className={` ${!isDark && "bg-gray-200"} sticky top-0  z-30 ${
+            isDark && "bg-black text-white"
+          }`}
+        >
           <tr className="w-full mb-10">
             <th className="md:py-2  py-1 sticky font-semibold text-sm md:text-base md:font-bold">
               Name
@@ -55,10 +59,12 @@ const CryptoTable = () => {
             CryptoData.map((coin) => (
               <tr
                 key={coin.id}
-                className="hover:bg-zinc-200 md:h-14 h-8 cursor-pointer  "
+                className={`${
+                  isDark ? " hover:bg-zinc-600" : "hover:bg-zinc-200"
+                } md:h-14 h-8 cursor-pointer  `}
                 onClick={() => handleClick(coin.id)}
               >
-                <td className="flex gap-1 items-center py-2 md:py-4 font-normal md:font-semibold  justify-center   ">
+                <td className="flex  items-center py-2 md:py-4 font-normal md:font-semibold  justify-center   ">
                   <td className="w-6 h-6 md:w-8 md:h-8 rounded-full ">
                     <img
                       className="w-full h-full rounded-full "
@@ -117,15 +123,53 @@ const CryptoTable = () => {
           ) : (
             <>
               <tr className="w-full h-96 justify-center items-center">
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100">Loading.. Please Wait...</td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
-                <td className="bg-zinc-100"></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                >
+                  Loading.. Please Wait...
+                </td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
+                <td
+                  className={`${!isDark && "bg-zinc-100"} ${
+                    isDark && "bg-black text-white"
+                  }`}
+                ></td>
               </tr>
             </>
           )}

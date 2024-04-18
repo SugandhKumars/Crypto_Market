@@ -4,10 +4,11 @@ export const CryptoContext = createContext({});
 export const CryptoProvider = ({ children }) => {
   const [CryptoData, setCryptoData] = useState([]);
   const [coinName, setCoinName] = useState("");
+  const [isDark, setIsDark] = useState(true);
   const [page, setPage] = useState(1);
   const [allCoin, setAllCoin] = useState([]);
   const [coinDetails, setCoinDetails] = useState({});
-  const [coinId, setCoinId] = useState("bitcoin");
+  const [coinId, setCoinId] = useState("");
   const getData = async () => {
     const data = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinName.toLowerCase()}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en&precision=10`
@@ -55,6 +56,8 @@ export const CryptoProvider = ({ children }) => {
         coinDetails,
         setCoinId,
         coinId,
+        isDark,
+        setIsDark,
       }}
     >
       {children}

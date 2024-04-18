@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CryptoContext } from "../Context/CryptoContext";
 
 export const Search = () => {
-  const { setCoinName, coinName } = useContext(CryptoContext);
+  const { setCoinName, coinName, isDark } = useContext(CryptoContext);
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [search, setSearch] = useState([]);
 
@@ -32,7 +32,9 @@ export const Search = () => {
         }}
       >
         <input
-          className="md:border-[2px] border-[1px] outline-none rounded-md px-2 md:text-base text-xs w-[70%] md:w-64 py-1"
+          className={`md:border-[2px] border-[1px] outline-none rounded-md px-2 md:text-base text-xs w-[70%] md:w-64 py-1 ${
+            isDark && "bg-black"
+          }`}
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -42,13 +44,15 @@ export const Search = () => {
         />
         <button
           type="submit"
-          className="bg-blue-200 px-2 py-1 md:text-base text-xs md:px-2 md:py-1 rounded-lg"
+          className={`${!isDark && "bg-blue-200"} ${
+            isDark && "bg-zinc-500 text-white"
+          } px-2 py-1 md:text-base text-xs md:px-2 md:py-1 rounded-lg`}
         >
           Search
         </button>
       </form>
       {showSuggestion && searchText.trim().length > 0 && (
-        <div className=" z-50  w-[70%] md:w-[25%]   absolute  left-[10%] md:left-[3%] top-8 md:top-10 h-56 overflow-x-hidden backdrop-blur-md opacity-90">
+        <div className=" z-50  w-[70%] md:w-[70%]   absolute  left-[10%] md:left-[10%] top-8 md:top-10 h-56 overflow-x-hidden backdrop-blur-md opacity-90">
           {search?.coins?.map((c) => (
             <div
               key={c.id}

@@ -5,7 +5,7 @@ import Performance from "./Performance";
 import { CryptoContext } from "../Context/CryptoContext";
 
 const CoinDetails = () => {
-  const { setCoinId, coinId, coinDetails } = useContext(CryptoContext);
+  const { setCoinId, coinId, coinDetails, isDark } = useContext(CryptoContext);
   const { id } = useParams();
   const [dataType, setDataType] = useState("prices");
   const [days, setDays] = useState("7");
@@ -47,8 +47,12 @@ const CoinDetails = () => {
   return (
     <>
       {Object.keys(coinDetails).length > 0 ? (
-        <div className="w-full mt-2 flex flex-col  items-center gap-2 px-auto">
-          <div className="w-[90%] bg-zinc-100 p-2 rounded-lg ">
+        <div className="w-full pt-2 flex flex-col  items-center gap-2 px-auto">
+          <div
+            className={`w-[90%] ${!isDark && "bg-zinc-100"} ${
+              isDark && "bg-zinc-800 text-white"
+            } p-2 rounded-lg `}
+          >
             <div className="h-32 w-full   mb-2 flex-col p-2">
               <div className="flex mb-5 md:mb-10 items-center gap-2">
                 <div className="coinImage w-8 h-8   rounded-full">
