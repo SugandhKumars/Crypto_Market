@@ -4,13 +4,14 @@ import Chart from "./Chart";
 import Performance from "./Performance";
 import { CryptoContext } from "../Context/CryptoContext";
 import { MetroSpinner } from "react-spinners-kit";
+// import LineChart from "./LineChart";
 const CoinDetails = () => {
   const { setCoinId, coinId, coinDetails, isDark } = useContext(CryptoContext);
   const { id } = useParams();
   const [dataType, setDataType] = useState("prices");
   const [days, setDays] = useState("7");
   const [lineCharts, setLineCharts] = useState();
-
+  // console.log(days);
   useEffect(() => {
     const getCharts = async (id) => {
       const data = await fetch(
@@ -45,6 +46,11 @@ const CoinDetails = () => {
       maximumFractionDigits: 5,
     }).format(Value);
   };
+  // let xData = lineCharts?.map((item) => item.date);
+  const xData = ["2023-05-01", "2023-05-02", "2023-05-03"];
+  // let yData = lineCharts?.map((item) => item.prices);
+  const yData = [100, 120, 110];
+  // console.log(xData);
   return (
     <>
       {Object.keys(coinDetails).length > 0 ? (
@@ -169,6 +175,8 @@ const CoinDetails = () => {
             </div>
           </div>
           <Performance coin={coinDetails} />
+
+          {/* <LineChart xData={xData} yData={yData} /> */}
         </div>
       ) : (
         <p className="w-full h-screen flex justify-center items-center">

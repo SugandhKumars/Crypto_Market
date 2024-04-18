@@ -9,7 +9,7 @@ import { CryptoContext } from "../Context/CryptoContext";
 const HomePage = () => {
   const { isDark, setIsDark } = useContext(CryptoContext);
   return (
-    <div className={`h-full w-full   `}>
+    <div className={`h-[850px] w-full   `}>
       <div
         className={`${
           isDark && "bg-black text-white"
